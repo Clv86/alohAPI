@@ -1,7 +1,6 @@
 const axios = require('axios')
 const DayConditions = require('../models/dayConditions')
 const Spot = require('../models/spot')
-const dayConditions = require('../models/dayConditions')
 
 exports.deleteAllConditions = (req, res) => {
     DayConditions.deleteMany({})
