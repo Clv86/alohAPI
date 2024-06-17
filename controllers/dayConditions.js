@@ -24,6 +24,15 @@ exports.getAllConditions = (req, res) => {
     })
     .catch((error) => res.status(404).json({ error }))
 }
+exports.getOneCondition = (req, res) => {
+    DayConditions.findOne({
+        name : req.params.name
+    })
+    .then((spot) => {
+        res.status(200).json(spot)
+    })
+    .catch((error) => res.status(404).json({ error }))
+}
 exports.updateAllConditions = (req, res) => {
     Spot.find()
         .then((spots) => {
