@@ -34,6 +34,7 @@ exports.getOneCondition = (req, res) => {
     .catch((error) => res.status(404).json({ error }))
 }
 exports.updateAllConditions = (req, res) => {
+    DayConditions.deleteMany({})
     Spot.find()
         .then((spots) => {
             if (!spots) {
@@ -107,39 +108,3 @@ exports.updateAllConditions = (req, res) => {
             }
         })
 })}
-
-exports.addOneCondition = (req, res) => {
-    Spot.findById(req.params.id)
-        .then((spot) => {
-            if (!spot) {
-                return res.status(404).send('Spot non trouvé')
-            }
-
-            const { latitude, longitude } = spot.coordinates
-            return axios.get(
-                `https://marine-api.open-meteo.com/v1/marine?latitude=${latitude}&longitude=${longitude}&hourly=wave_height,wave_direction,wave_period&timezone=Europe%2FBerlin&forecast_days=1`
-            )
-        })
-        .then((response) => {
-            const data = response.data
-            const conditionsArray = data.hourly.time.map((time, index) => ({
-                time: data.hourly.time[index],
-                wave_height: data.hourly.wave_height[index],
-                wave_direction: data.hourly.wave_direction[index],
-                wave_period: data.hourly.wave_period[index],
-            }))
-            return DayConditions.insertMany(conditionsArray)
-        })
-        .then(() => {
-            res.status(200).send('Weather data saved successfully!')
-        })
-        .catch((error) => {
-            if (error.response) {
-                console.error(`HTTP error: ${error.response.status}`)
-            } else if (error.request) {
-                console.error('Request error: No response received')
-            } else {
-                console.error('Error:', error.message)
-            }
-        })
-}
