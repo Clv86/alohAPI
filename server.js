@@ -10,9 +10,7 @@ const dayConditionsRoutes = require('./routes/dayConditions')
 const weekConditionsRoutes = require('./routes/weekConditions')
 
 mongoose
-    .connect(process.env.URL,
-        { useNewUrlParser: true, useUnifiedTopology: true }
-    )
+    .connect(process.env.URL)
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
