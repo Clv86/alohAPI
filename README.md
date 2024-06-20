@@ -13,7 +13,7 @@ The API has 3 routes. The first one with the spots coordinates manages which spo
 
 ## Challenges and future implementations
 
-For now there is too many logic in the controllers. Next implementation should be to create a services or utils folder managing all the logic concerning fetching weather databases.
+For now there is too much logic in the controllers. Next implementation should be to create a services or utils folder managing all the logic concerning fetching weather databases.
 
 ## Setup
 
