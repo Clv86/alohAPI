@@ -3,12 +3,14 @@ const app = express()
 const PORT = 8080
 const mongoose = require('mongoose')
 
+require('dotenv').config()
+
 const spotRoutes = require('./routes/spot')
 const dayConditionsRoutes = require('./routes/dayConditions')
+const weekConditionsRoutes = require('./routes/weekConditions')
 
 mongoose
-    .connect(
-        'mongodb+srv://Cl:CJeUaz0TLUBkp4Hi@cluster0.y5turie.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    .connect(process.env.URL,
         { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -29,4 +31,6 @@ app.use((req, res, next) => {
 })
 app.use('/spot', spotRoutes)
 app.use('/dayConditions', dayConditionsRoutes)
+app.use('/weekConditions', weekConditionsRoutes)
+
 app.listen(PORT, () => console.log(`it's alive on http://localhost:${PORT}`))
