@@ -3,6 +3,9 @@ const Spot = require('../models/spot');
 exports.addSpot = async (req, res, next) => {
     try {
         delete req.body._id;
+        if (!req.body.coordinates || !req.body.coordinates.latitude || !req.body.coordinates.longitude) {
+            return res.status(400).json({ error: 'Coordonnées invalides' });
+        }
         const spot = new Spot({
             name: req.body.name,
             coordinates: {
@@ -10,6 +13,7 @@ exports.addSpot = async (req, res, next) => {
                 longitude: req.body.coordinates.longitude,
             },
         });
+
         await spot.save();
         res.status(201).json({ message: 'Spot enregistré !' });
     } catch (error) {
