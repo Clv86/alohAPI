@@ -1,21 +1,14 @@
 const axios = require('axios')
 const DayConditions = require('../models/dayConditions')
 const Spot = require('../models/spot')
+const { handleError } = require('../services/errorService')
 
 exports.deleteAllConditions = (req, res) => {
     DayConditions.deleteMany({})
         .then(() => {
             res.status(200).send('Weather data deleted successfully!')
         })
-        .catch((error) => {
-            if (error.response) {
-                console.error(`HTTP error: ${error.response.status}`)
-            } else if (error.request) {
-                console.error('Request error: No response received')
-            } else {
-                console.error('Error:', error.message)
-            }
-        })
+        .catch((error) => handleError(error, res))
 }
 exports.getAllConditions = (req, res) => {
     DayConditions.find()
@@ -104,14 +97,6 @@ exports.updateAllConditions = (req, res) => {
             .then((allData) => {
                 res.json('Weather data saved successfully!')
             })
-            .catch((error) => {
-                if (error.response) {
-                    console.error(`HTTP error: ${error.response.status}`)
-                } else if (error.request) {
-                    console.error('Request error: No response received')
-                } else {
-                    console.error('Error:', error.message)
-                }
-            })
+            .catch((error) => handleError(error, res))
     })
 }
