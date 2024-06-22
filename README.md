@@ -11,10 +11,6 @@ For this project, I've chosen a Javascript stack with Node JS and Express JS for
 
 The API has 3 routes. The first one with the spots coordinates manages which spots are concerned by the database. The two other ones are dayConditions (to manage conditions by hours) and weekConditions (to manage conditions by days). They have a main function which is to erase all the previous datas and get all the last weather conditions for every spots available. Their other functions are used by the client to fetch either all the conditions, either one specific spot condition.
 
-## Challenges and future implementations
-
-For now there is too much logic in the controllers. Next implementation should be to create a services or utils folder managing all the logic concerning fetching weather databases.
-
 ## Setup
 
 -   Install all the requirements using npm :
