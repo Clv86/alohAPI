@@ -5,7 +5,7 @@ const { fetchWeatherData, transformWeekConditions } = require('./weatherService'
 const updateWeekConditions = async () => {
     const spots = await Spot.find();
     if (!spots) {
-        throw new Error('Spots not found');
+        throw new Error('Spots non trouvé');
     }
 
     const conditionsData = await Promise.all(spots.map(async (spot) => {
@@ -21,7 +21,7 @@ const updateWeekConditions = async () => {
     await WeekConditions.deleteMany({});
     await Promise.all(conditionsData.map(data => new WeekConditions(data).save()));
 
-    return 'Week weather data saved successfully!';
+    return 'Conditions météo de la semaine enregistrées !';
 };
 
 module.exports = {

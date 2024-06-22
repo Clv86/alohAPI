@@ -5,7 +5,7 @@ const { handleError } = require('../services/errorService')
 exports.deleteAllConditions = async (req, res) => {
     try {
         await DayConditions.deleteMany({});
-        res.status(200).send('Weather data deleted successfully!');
+        res.status(200).send('Données météo effacées !');
     } catch (error) {
         handleError(error, res);
     }
@@ -24,7 +24,7 @@ exports.getOneCondition = async (req, res) => {
     try {
         const condition = await DayConditions.findOne({ name: req.params.name });
         if (!condition) {
-            return res.status(404).json({ error: 'Condition not found' });
+            return res.status(404).json({ error: 'Conditions météo non trouvées' });
         }
         res.status(200).json(condition);
     } catch (error) {

@@ -5,7 +5,7 @@ const { fetchWeatherData, transformDayConditions } = require('./weatherService')
 const updateDayConditions = async () => {
     const spots = await Spot.find();
     if (!spots) {
-        throw new Error('Spots not found');
+        throw new Error('Spots non trouvé');
     }
 
     const conditionsData = await Promise.all(spots.map(async (spot) => {
@@ -21,7 +21,7 @@ const updateDayConditions = async () => {
     await DayConditions.deleteMany({});
     await Promise.all(conditionsData.map(data => new DayConditions(data).save()));
 
-    return 'Day weather data saved successfully!';
+    return 'Conditions météo du jour enregistrées !';
 };
 
 module.exports = {
