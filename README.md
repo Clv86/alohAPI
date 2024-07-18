@@ -29,7 +29,7 @@ The API has 3 routes. The first one with the spots coordinates manages which spo
 
 This project can also be deploy with Docker in order to facilitate testing and the implementation of further upgrades in the same environment. you can build the docker image of the project with :
 
-### docker build -t image-name
+### `docker build -t image-name`
 
 ## List of requests
 
